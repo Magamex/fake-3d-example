@@ -1,0 +1,257 @@
+[gd_scene load_steps=29 format=3 uid="uid://c3hnwcsto6rl"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skin_manager.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://nc086ggs5dxq" path="res://assets/player/map.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://d01soxg8oqp0x" path="res://assets/player/shadow.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bx2oxqkifd5lt" path="res://assets/player/skins/skin_pants.png" id="5"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_manager.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/states/walk.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/states/idle.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/states/run.gd" id="9"]
+[ext_resource type="Texture2D" uid="uid://bom76an8yfr7a" path="res://assets/player/clothing/cape.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://bbnvimhc2n5h6" path="res://animations/idle.png" id="11"]
+[ext_resource type="Script" path="res://assets/player/interact_area.gd" id="12"]
+
+[sub_resource type="AtlasTexture" id="7"]
+atlas = ExtResource("10")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="8"]
+atlas = ExtResource("10")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="9"]
+atlas = ExtResource("10")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="10"]
+atlas = ExtResource("10")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="11"]
+atlas = ExtResource("10")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="12"]
+atlas = ExtResource("10")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="13"]
+atlas = ExtResource("10")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="14"]
+atlas = ExtResource("10")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("7")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("8")
+}],
+"loop": true,
+"name": &"down-left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("9")
+}],
+"loop": true,
+"name": &"down-right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("10")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("11")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("12")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("13")
+}],
+"loop": true,
+"name": &"up-left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("14")
+}],
+"loop": true,
+"name": &"up-right",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 4)
+
+[sub_resource type="Animation" id="4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin/body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin/body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="5"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin/body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin/body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_npdnq"]
+_data = {
+"RESET": SubResource("4"),
+"idle": SubResource("2"),
+"run": SubResource("5"),
+"walk": SubResource("3")
+}
+
+[sub_resource type="CircleShape2D" id="15"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1")
+
+[node name="skin" type="Node2D" parent="."]
+script = ExtResource("2")
+skin = ExtResource("5")
+map = ExtResource("3")
+
+[node name="body" type="Sprite2D" parent="skin"]
+texture = ExtResource("11")
+hframes = 7
+
+[node name="clothing" type="Node2D" parent="."]
+
+[node name="cape" type="AnimatedSprite2D" parent="clothing"]
+visible = false
+sprite_frames = SubResource("6")
+animation = &"down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+shape = SubResource("1")
+
+[node name="state_manager" type="Node" parent="."]
+script = ExtResource("6")
+
+[node name="idle" type="Node" parent="state_manager"]
+script = ExtResource("8")
+animation_name = "idle"
+frame_number = 1
+
+[node name="walk" type="Node" parent="state_manager"]
+script = ExtResource("7")
+move_speed = 30.0
+animation_name = "walk"
+frame_number = 6
+
+[node name="run" type="Node" parent="state_manager"]
+script = ExtResource("9")
+animation_name = "run"
+frame_number = 6
+animation_speed = 1.2
+
+[node name="animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_npdnq")
+}
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.784314)
+show_behind_parent = true
+position = Vector2(0, 8)
+texture = ExtResource("4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="interact_area" type="Area2D" parent="."]
+script = ExtResource("12")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact_area"]
+position = Vector2(0, 7)
+shape = SubResource("15")

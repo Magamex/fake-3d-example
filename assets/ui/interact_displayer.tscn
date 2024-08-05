@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://kv132aeuk3ck"]
+
+[sub_resource type="FontFile" id="1"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[node name="press_button" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -17.0
+offset_top = -5.0
+offset_right = 18.0
+offset_bottom = 4.0
+theme_override_fonts/font = SubResource("1")
+text = "'space'"
