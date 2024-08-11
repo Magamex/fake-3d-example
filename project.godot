@@ -25,11 +25,9 @@ game_visual_fx="*res://scripts/global/game_visual_fx.tscn"
 
 [display]
 
-window/size/viewport_width=330
-window/size/viewport_height=130
-window/size/window_width_override=1080
-window/size/window_height_override=1080
+window/size/initial_position_type=0
 window/stretch/mode="2d"
+window/stretch/scale=2.0
 
 [gui]
 
