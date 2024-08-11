@@ -1,12 +1,10 @@
 res://default_env.tres
 res://main.tscn
+res://scripts/mannequin/mannequin.gd
+res://scripts/mannequin/skin_manager_simple.gd
+res://scripts/skin_manager.gd
 res://assets/ui/interact_displayer.tscn
 res://scripts/global/game_visual_fx.tscn
 res://assets/objects/campfire.tscn
 res://assets/player/player.tscn
 res://assets/mannequin/mannequin.tscn
-res://assets/player/interact_area.gd
-res://scripts/mannequin/mannequin.gd
-res://scripts/mannequin/skin_manager_simple.gd
-res://scripts/player/player.gd
-res://scripts/skin_manager.gd

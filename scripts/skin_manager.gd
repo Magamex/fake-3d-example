@@ -18,7 +18,6 @@ var animation_files = {} #here is where all the animation files will be stored, 
 
 func _ready():
 	map = load_image(map.get_path()) #load the map as a raw png by referencing the path to the uv map png
-	print(map.get_path())
 	map_coordinates = grab_map(map) #grab the coordenates for the uv map and store into a dictionary
 	update_skin(skin)
 
@@ -30,7 +29,6 @@ func update_skin(texture):
 		skin = load_image(skin.get_path()) #load skin as a raw png by referencing the path to the skin png
 	skin_colors = grab_map(skin) #grab the skin coordenates and store into a dictionary
 	for folder in states.get_children(): #loop through my states
-		print(folder)
 		var path = "res://animations/%s/" %folder.name #grab the path for each folder containing all the spritesheets by using the state name
 		update_source_folder(read_folder(path),folder.name) #update each folder by reading all the files, storing into an array and referencing the name of the state
 
@@ -66,17 +64,17 @@ func read_folder(path): #funcion for reading a folder and retrieve it's files (p
 func load_image(source): #tunrs the reference source png into a raw png
 	var image = Image.new() #creates a new image
 	var err = image.load(source) #load the source in the the image
-#	if err != OK:
-#		print("image load failed")
-#	else:
-#		print("image loaded")
+	if err != OK:
+		print("image load failed")
+	else:
+		print("image loaded")
 	return image #returns the image as a raw png
 
 func grab_map(image): #function to map each pixel of an image by it's xy coordinate and color in that value
 	var width = image.get_width() #grab the image width
 	var height = image.get_height() #grab the image height
 	var coordinates = {} #new dictionary to store vector 2 and color variables
-	false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image, still not sure why I need to do this honestly
+	#false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image, still not sure why I need to do this honestly
 	var cell_x = 0 #current x position
 	var cell_y = 0 #current y position
 	var cur_pos = Vector2() #current position in vector 2
@@ -96,7 +94,7 @@ func map_image(image): #this function might be redundant, but it's a little diff
 	var width = image.get_width() #grab the image width
 	var height = image.get_height()#grab the image height
 	var coordinates = {} #new dictionary to store vector 2 and color variables
-	false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image
+	#false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image
 	var cell_x = 0 #current x position
 	var cell_y = 0 #current y position
 	var cur_pos = Vector2() #current position in vector 2
@@ -121,10 +119,10 @@ func apply_colors(image,index,anim_name): #shift each pixel by grabbing the imag
 					if source_file_coordinates[index][pos] == map_coordinates[vec2]: #if the color is the same as the uv map
 						new_map.push_back([pos,skin_colors[vec2]]) #pushes back the vector2 position and the color
 	for i in new_map.size(): #for each position in the array of the new colors
-		false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image
+		#false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image
 		image.set_pixelv(new_map[i][0],new_map[i][1]) #set each pixel as the referenced color from the skin map
-	false # image.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #unlock the image, not sure why
-	var tex = ImageTexture.new() #creates a new image texture
-	tex.create_from_image(image) #,0 #updates the image texture by grabbing the raw png
+	#false # image.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #unlock the image, not sure why
+	var tex = ImageTexture.create_from_image(image) #creates a new image texture
+	#ImageTexture.create_from_image(image) #,0 #updates the image texture by grabbing the raw png
 	animation_files[anim_name].push_back(tex) #push back the image texture into the animation array
 

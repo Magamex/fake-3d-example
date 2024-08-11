@@ -37,7 +37,7 @@ func grab_map(image): #function to map each pixel of an image by it's xy coordin
 	var width = image.get_width() #grab the image width
 	var height = image.get_height() #grab the image height
 	var coordinates = {} #new dictionary to store vector 2 and color variables
-	false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image, still not sure why I need to do this honestly
+	#false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image, still not sure why I need to do this honestly
 	var cell_x = 0 #current x position
 	var cell_y = 0 #current y position
 	var cur_pos = Vector2() #current position in vector 2
@@ -57,7 +57,7 @@ func map_image(image): #this function might be redundant, but it's a little diff
 	var width = image.get_width() #grab the image width
 	var height = image.get_height()#grab the image height
 	var coordinates = {} #new dictionary to store vector 2 and color variables
-	false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image
+	#false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image
 	var cell_x = 0 #current x position
 	var cell_y = 0 #current y position
 	var cur_pos = Vector2() #current position in vector 2
@@ -82,10 +82,10 @@ func apply_colors(image): #shift each pixel by grabbing the image, current index
 					if source_file_coordinates[pos] == map_coordinates[vec2]: #if the color is the same as the uv map
 						new_map.push_back([pos,skin_colors[vec2]]) #pushes back the vector2 position and the color
 	for i in new_map.size(): #for each position in the array of the new colors
-		false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image
+		#false # image.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #lock the image
 		image.set_pixelv(new_map[i][0],new_map[i][1]) #set each pixel as the referenced color from the skin map
-	false # image.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #unlock the image, not sure why
-	var tex = ImageTexture.new() #creates a new image texture
-	tex.create_from_image(image) #,0 #updates the image texture by grabbing the raw png
+	#false # image.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed #unlock the image, not sure why
+	var tex = ImageTexture.create_from_image(image) #creates a new image texture
+	#ImageTexture.create_from_image(image) #,0 #updates the image texture by grabbing the raw png
 	new_map_test = new_map
 	$body.texture = tex

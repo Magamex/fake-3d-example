@@ -12,6 +12,7 @@ var cur_dir = "down"
 @onready var interact_area = $interact_area
 @export var is_mannequin: bool = false
 func _ready() -> void:
+	print(skin.get_path())
 	states.init(self)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -21,7 +22,6 @@ func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
 func update_direction():
 	for children in skin.get_children():
-		print(skin.animation_files[animations.get_current_animation()][game_libraries.anim_directions[cur_dir]])
 		children.texture = skin.animation_files[animations.get_current_animation()][game_libraries.anim_directions[cur_dir]]
 	for children in clothing.get_children():
 		children.animation = cur_dir
