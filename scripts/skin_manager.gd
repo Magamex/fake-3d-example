@@ -125,4 +125,3 @@ func apply_colors(image,index,anim_name): #shift each pixel by grabbing the imag
 	var tex = ImageTexture.create_from_image(image) #creates a new image texture
 	#ImageTexture.create_from_image(image) #,0 #updates the image texture by grabbing the raw png
 	animation_files[anim_name].push_back(tex) #push back the image texture into the animation array
-
